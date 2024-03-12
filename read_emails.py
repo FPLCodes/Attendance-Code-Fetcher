@@ -108,6 +108,14 @@ def get_FIT3171_codes():
         print(f"Workshop code: {workshop_code}\nApplied code: {applied_code}\n")
 
 
+def get_ETW2001_codes():
+    processed_text = extract_text_from_image("images/ETW2001_0_0.png")
+    if processed_text:
+        tutorial_code = processed_text[-5]
+        print("\nETW2001 Attendance codes")
+        print(f"Tutorial code: {tutorial_code}\n")
+
+
 # Main execution starts here
 # Load credentials and build the Gmail service
 creds = Credentials.from_authorized_user_file("gmail_token.json")
@@ -115,11 +123,12 @@ service = build("gmail", "v1", credentials=creds)
 
 # Define your search queries and corresponding processing functions
 queries = [
-    'subject:"FIT3161 - FIT3162 - MUM S1 2024 - Announcements - [ATTENDANCE] Week 2 codes"',
-    'subject:"FIT3171 DATABASES - MUM S1 2024 - Announcements - [Week 2] Attendance Codes for International Students"',
+    'subject:"FIT3161 - FIT3162 - MUM S1 2024 - Announcements - [ATTENDANCE] Week 3 codes"',
+    'subject:"FIT3171 DATABASES - MUM S1 2024 - Announcements - [Week 3] Attendance Codes for International Students"',
+    'subject:"ETW2001 - MUM S1 2024 - Announcements - Week 3 Attendance Codes (for international students)"',
 ]
 
-functions = [get_FIT3161_codes, get_FIT3171_codes]
+functions = [get_FIT3161_codes, get_FIT3171_codes, get_ETW2001_codes]
 
 # Process each query
 for query in queries:
